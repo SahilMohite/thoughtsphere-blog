@@ -36,7 +36,7 @@ const createPost = async () => {
   };
 
   const response = await axios.post(
-    "http://localhost:5000/posts",
+    " https://thoughtsphere-blog.onrender.com",
     newPost
   );
 
@@ -58,7 +58,7 @@ const createPost = async () => {
 
   useEffect(() => {
   axios
-    .get("http://localhost:5000/posts")
+    .get(" https://thoughtsphere-blog.onrender.com")
     .then((res) => setPosts(res.data));
 }, []);
 
