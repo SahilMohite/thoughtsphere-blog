@@ -1,0 +1,291 @@
+export default function ThoughtsBlogWebsite() {
+  const posts = [
+    {
+      id: 1,
+      title: "Why Consistency Beats Motivation",
+      author: "Sahil Mohite",
+      date: "May 24, 2026",
+      likes: 128,
+      comments: 18,
+      content:
+        "Most people wait for motivation before starting. But the people who grow are the ones who keep showing up even when they don't feel like it.",
+      image:
+        "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      id: 2,
+      title: "Building in Public",
+      author: "Sahil Mohite",
+      date: "May 20, 2026",
+      likes: 89,
+      comments: 12,
+      content:
+        "Sharing your journey online helps you improve faster, connect with people, and stay accountable.",
+      image:
+        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-[#0f172a] text-white font-sans">
+      {/* Navbar */}
+      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10 backdrop-blur-lg sticky top-0 bg-[#0f172a]/90 z-50">
+        <div>
+          <h1 className="text-2xl font-bold tracking-wide">ThoughtSphere</h1>
+          <p className="text-sm text-gray-400">Share your thoughts with the world</p>
+        </div>
+
+        <div className="hidden md:flex items-center gap-8 text-sm text-gray-300">
+          <a href="#" className="hover:text-white transition">
+            Home
+          </a>
+          <a href="#" className="hover:text-white transition">
+            Explore
+          </a>
+          <a href="#" className="hover:text-white transition">
+            Trending
+          </a>
+          <a href="#" className="hover:text-white transition">
+            About
+          </a>
+        </div>
+
+        <button className="bg-white text-black px-5 py-2 rounded-full font-medium hover:scale-105 transition-all">
+          Create Post
+        </button>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="px-8 py-20 max-w-7xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
+        <div>
+          <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 text-sm text-gray-300">
+            Modern Blogging Platform
+          </span>
+
+          <h2 className="text-5xl md:text-7xl font-bold leading-tight mt-6">
+            Turn Your <span className="text-cyan-400">Thoughts</span> Into Conversations
+          </h2>
+
+          <p className="text-gray-400 text-lg mt-6 leading-relaxed max-w-xl">
+            Publish blogs, share experiences, collect likes, and engage with your audience through comments.
+            A clean and modern platform built for creators.
+          </p>
+
+          <div className="flex flex-wrap gap-4 mt-8">
+            <button className="bg-cyan-400 text-black font-semibold px-6 py-3 rounded-2xl hover:scale-105 transition-all shadow-xl">
+              Start Writing
+            </button>
+
+            <button className="border border-white/20 px-6 py-3 rounded-2xl hover:bg-white/10 transition-all">
+              Explore Blogs
+            </button>
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="absolute inset-0 bg-cyan-400 blur-3xl opacity-20 rounded-full"></div>
+
+          <div className="relative bg-white/5 border border-white/10 backdrop-blur-xl rounded-[32px] p-6 shadow-2xl">
+            <img
+              src="https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=1200&auto=format&fit=crop"
+              alt="blogging"
+              className="rounded-3xl h-[450px] w-full object-cover"
+            />
+
+            <div className="grid grid-cols-3 gap-4 mt-5">
+              <div className="bg-white/5 p-4 rounded-2xl text-center border border-white/10">
+                <h3 className="text-2xl font-bold">12K+</h3>
+                <p className="text-gray-400 text-sm mt-1">Readers</p>
+              </div>
+
+              <div className="bg-white/5 p-4 rounded-2xl text-center border border-white/10">
+                <h3 className="text-2xl font-bold">4.8★</h3>
+                <p className="text-gray-400 text-sm mt-1">Engagement</p>
+              </div>
+
+              <div className="bg-white/5 p-4 rounded-2xl text-center border border-white/10">
+                <h3 className="text-2xl font-bold">1K+</h3>
+                <p className="text-gray-400 text-sm mt-1">Posts</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Feed */}
+      <section className="max-w-7xl mx-auto px-8 py-16">
+        <div className="flex items-center justify-between mb-10">
+          <div>
+            <h2 className="text-4xl font-bold">Latest Thoughts</h2>
+            <p className="text-gray-400 mt-2">
+              Read what creators are sharing today.
+            </p>
+          </div>
+
+          <input
+            type="text"
+            placeholder="Search blogs..."
+            className="bg-white/5 border border-white/10 rounded-xl px-5 py-3 outline-none focus:border-cyan-400 w-[260px]"
+          />
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8">
+          {posts.map((post) => (
+            <div
+              key={post.id}
+              className="bg-white/5 border border-white/10 rounded-[28px] overflow-hidden hover:-translate-y-2 transition-all duration-300 shadow-2xl"
+            >
+              <img
+                src={post.image}
+                alt={post.title}
+                className="h-[280px] w-full object-cover"
+              />
+
+              <div className="p-7">
+                <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
+                  <span>{post.author}</span>
+                  <span>{post.date}</span>
+                </div>
+
+                <h3 className="text-3xl font-bold mb-4 leading-snug">
+                  {post.title}
+                </h3>
+
+                <p className="text-gray-400 leading-relaxed mb-6">
+                  {post.content}
+                </p>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-6 text-gray-300">
+                    <button className="flex items-center gap-2 hover:text-pink-400 transition">
+                      ❤️ {post.likes}
+                    </button>
+
+                    <button className="flex items-center gap-2 hover:text-cyan-400 transition">
+                      💬 {post.comments}
+                    </button>
+                  </div>
+
+                  <button className="bg-cyan-400 text-black px-5 py-2 rounded-xl font-semibold hover:scale-105 transition-all">
+                    Read More
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Create Post Section */}
+      <section className="max-w-5xl mx-auto px-8 py-20">
+        <div className="bg-gradient-to-br from-cyan-500/20 to-purple-500/10 border border-white/10 rounded-[36px] p-10 backdrop-blur-xl">
+          <h2 className="text-4xl font-bold mb-4">Create a New Thought</h2>
+          <p className="text-gray-400 mb-8">
+            Share ideas, stories, lessons, or anything on your mind.
+          </p>
+
+          <div className="space-y-5">
+            <input
+              type="text"
+              placeholder="Enter blog title"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-cyan-400"
+            />
+
+            <textarea
+              rows="7"
+              placeholder="Write your thoughts here..."
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-cyan-400 resize-none"
+            ></textarea>
+
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <input
+                type="file"
+                className="text-sm text-gray-400"
+              />
+
+              <button className="bg-white text-black px-8 py-3 rounded-2xl font-semibold hover:scale-105 transition-all">
+                Publish Post
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Comments Preview */}
+      <section className="max-w-7xl mx-auto px-8 py-16">
+        <div className="flex items-center justify-between mb-10">
+          <div>
+            <h2 className="text-4xl font-bold">Community Comments</h2>
+            <p className="text-gray-400 mt-2">
+              Readers engaging with your content.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            {
+              name: "Aarav",
+              comment:
+                "This really motivated me to stay consistent with my goals.",
+            },
+            {
+              name: "Riya",
+              comment:
+                "The design looks amazing and the blog idea is inspiring.",
+            },
+            {
+              name: "Kabir",
+              comment:
+                "Looking forward to reading more posts from this platform.",
+            },
+          ].map((item, index) => (
+            <div
+              key={index}
+              className="bg-white/5 border border-white/10 rounded-3xl p-6 hover:bg-white/10 transition-all"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="h-14 w-14 rounded-full bg-cyan-400 text-black flex items-center justify-center font-bold text-lg">
+                  {item.name.charAt(0)}
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg">{item.name}</h3>
+                  <p className="text-sm text-gray-400">Community Member</p>
+                </div>
+              </div>
+
+              <p className="text-gray-300 leading-relaxed">
+                “{item.comment}”
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-white/10 mt-10 py-10 px-8">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h2 className="text-2xl font-bold">ThoughtSphere</h2>
+            <p className="text-gray-400 mt-2">
+              A modern blogging platform built for creators.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-6 text-gray-400">
+            <a href="#" className="hover:text-white transition">
+              Instagram
+            </a>
+            <a href="#" className="hover:text-white transition">
+              Twitter
+            </a>
+            <a href="#" className="hover:text-white transition">
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
