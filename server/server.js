@@ -38,7 +38,11 @@ app.post("/posts", async (req, res) => {
   await newPost.save();
   res.json(newPost);
 });
-
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.listen(5000, () => {
   console.log("Server running on port 5000");
 });

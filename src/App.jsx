@@ -36,7 +36,7 @@ const createPost = async () => {
   };
 
   const response = await axios.post(
-    " https://thoughtsphere-blog.onrender.com",
+    "https://thoughtsphere-blog.onrender.com/posts",
     newPost
   );
 
@@ -56,10 +56,11 @@ const createPost = async () => {
     );
   };
 
-  useEffect(() => {
+useEffect(() => {
   axios
-    .get(" https://thoughtsphere-blog.onrender.com")
-    .then((res) => setPosts(res.data));
+    .get("https://thoughtsphere-blog.onrender.com/posts")
+    .then((res) => setPosts(res.data))
+    .catch((err) => console.log(err));
 }, []);
 
   return (
