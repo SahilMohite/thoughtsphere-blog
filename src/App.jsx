@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function ThoughtsBlogWebsite() {
   const [posts, setPosts] = useState([
