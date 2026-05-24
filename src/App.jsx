@@ -79,9 +79,16 @@ export default function ThoughtsBlogWebsite() {
           </a>
         </div>
 
-        <button className="bg-white text-black px-5 py-2 rounded-full font-medium hover:scale-105 transition-all">
-          Create Post
-        </button>
+        <button
+  onClick={() =>
+    document
+      .getElementById("create-post")
+      .scrollIntoView({ behavior: "smooth" })
+  }
+  className="bg-white text-black px-5 py-2 rounded-full font-medium hover:scale-105 transition-all"
+>
+  Create Post
+</button>
       </nav>
 
       {/* Hero Section */}
@@ -102,13 +109,27 @@ export default function ThoughtsBlogWebsite() {
           </p>
 
           <div className="flex flex-wrap gap-4 mt-8">
-            <button className="bg-cyan-400 text-black font-semibold px-6 py-3 rounded-2xl hover:scale-105 transition-all shadow-xl">
-              Start Writing
-            </button>
+            <button
+  onClick={() =>
+    document
+      .getElementById("create-post")
+      .scrollIntoView({ behavior: "smooth" })
+  }
+  className="bg-cyan-400 text-black font-semibold px-6 py-3 rounded-2xl hover:scale-105 transition-all shadow-xl"
+>
+  Start Writing
+</button>
 
-            <button className="border border-white/20 px-6 py-3 rounded-2xl hover:bg-white/10 transition-all">
-              Explore Blogs
-            </button>
+            <button
+  onClick={() =>
+    document
+      .getElementById("latest-blogs")
+      .scrollIntoView({ behavior: "smooth" })
+  }
+  className="border border-white/20 px-6 py-3 rounded-2xl hover:bg-white/10 transition-all"
+>
+  Explore Blogs
+</button>
           </div>
         </div>
 
@@ -126,7 +147,10 @@ export default function ThoughtsBlogWebsite() {
       </section>
 
       {/* Create Post Section */}
-      <section className="max-w-5xl mx-auto px-8 py-10">
+      <section
+  id="create-post"
+  className="max-w-5xl mx-auto px-8 py-10"
+>
         <div className="bg-gradient-to-br from-cyan-500/20 to-purple-500/10 border border-white/10 rounded-[36px] p-10 backdrop-blur-xl">
           <h2 className="text-4xl font-bold mb-4">Create a New Thought</h2>
 
@@ -158,7 +182,10 @@ export default function ThoughtsBlogWebsite() {
       </section>
 
       {/* Blog Feed */}
-      <section className="max-w-7xl mx-auto px-8 py-16">
+   <section
+  id="latest-blogs"
+  className="max-w-7xl mx-auto px-8 py-16"
+>
         <div className="flex items-center justify-between mb-10">
           <div>
             <h2 className="text-4xl font-bold">Latest Thoughts</h2>
