@@ -19,29 +19,32 @@ export default function ThoughtsBlogWebsite() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const createPost = () => {
-    if (!title || !content) {
-      alert("Please fill all fields");
-      return;
-    }
+const createPost = async () => {
+  if (!title || !content) {
+    alert("Please fill all fields");
+    return;
+  }
 
-    const newPost = {
-      id: Date.now(),
-      title,
-      content,
-      author: "Sahil Mohite",
-      date: new Date().toLocaleDateString(),
-      likes: 0,
-      comments: 0,
-      image:
-        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop",
-    };
-
-    setPosts([newPost, ...posts]);
-
-    setTitle("");
-    setContent("");
+  const newPost = {
+    title,
+    content,
+    author: "Sahil Mohite",
+    likes: 0,
+    comments: 0,
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop",
   };
+
+  const response = await axios.post(
+    "http://localhost:5000/posts",
+    newPost
+  );
+
+  setPosts([response.data, ...posts]);
+
+  setTitle("");
+  setContent("");
+};
 
   const likePost = (id) => {
     setPosts(
@@ -52,6 +55,12 @@ export default function ThoughtsBlogWebsite() {
       )
     );
   };
+
+  useEffect(() => {
+  axios
+    .get("http://localhost:5000/posts")
+    .then((res) => setPosts(res.data));
+}, []);
 
   return (
     <div className="min-h-screen bg-[#0f172a] text-white font-sans">
