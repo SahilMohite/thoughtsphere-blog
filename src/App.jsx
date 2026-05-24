@@ -1,5 +1,7 @@
+import { useState } from "react";
+
 export default function ThoughtsBlogWebsite() {
-  const posts = [
+  const [posts, setPosts] = useState([
     {
       id: 1,
       title: "Why Consistency Beats Motivation",
@@ -12,19 +14,44 @@ export default function ThoughtsBlogWebsite() {
       image:
         "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=1200&auto=format&fit=crop",
     },
-    {
-      id: 2,
-      title: "Building in Public",
+  ]);
+
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  const createPost = () => {
+    if (!title || !content) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    const newPost = {
+      id: Date.now(),
+      title,
+      content,
       author: "Sahil Mohite",
-      date: "May 20, 2026",
-      likes: 89,
-      comments: 12,
-      content:
-        "Sharing your journey online helps you improve faster, connect with people, and stay accountable.",
+      date: new Date().toLocaleDateString(),
+      likes: 0,
+      comments: 0,
       image:
         "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop",
-    },
-  ];
+    };
+
+    setPosts([newPost, ...posts]);
+
+    setTitle("");
+    setContent("");
+  };
+
+  const likePost = (id) => {
+    setPosts(
+      posts.map((post) =>
+        post.id === id
+          ? { ...post, likes: post.likes + 1 }
+          : post
+      )
+    );
+  };
 
   return (
     <div className="min-h-screen bg-[#0f172a] text-white font-sans">
@@ -32,7 +59,9 @@ export default function ThoughtsBlogWebsite() {
       <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10 backdrop-blur-lg sticky top-0 bg-[#0f172a]/90 z-50">
         <div>
           <h1 className="text-2xl font-bold tracking-wide">ThoughtSphere</h1>
-          <p className="text-sm text-gray-400">Share your thoughts with the world</p>
+          <p className="text-sm text-gray-400">
+            Share your thoughts with the world
+          </p>
         </div>
 
         <div className="hidden md:flex items-center gap-8 text-sm text-gray-300">
@@ -63,12 +92,13 @@ export default function ThoughtsBlogWebsite() {
           </span>
 
           <h2 className="text-5xl md:text-7xl font-bold leading-tight mt-6">
-            Turn Your <span className="text-cyan-400">Thoughts</span> Into Conversations
+            Turn Your <span className="text-cyan-400">Thoughts</span> Into
+            Conversations
           </h2>
 
           <p className="text-gray-400 text-lg mt-6 leading-relaxed max-w-xl">
-            Publish blogs, share experiences, collect likes, and engage with your audience through comments.
-            A clean and modern platform built for creators.
+            Publish blogs, share experiences, collect likes, and engage with
+            your audience through comments.
           </p>
 
           <div className="flex flex-wrap gap-4 mt-8">
@@ -91,23 +121,38 @@ export default function ThoughtsBlogWebsite() {
               alt="blogging"
               className="rounded-3xl h-[450px] w-full object-cover"
             />
+          </div>
+        </div>
+      </section>
 
-            <div className="grid grid-cols-3 gap-4 mt-5">
-              <div className="bg-white/5 p-4 rounded-2xl text-center border border-white/10">
-                <h3 className="text-2xl font-bold">12K+</h3>
-                <p className="text-gray-400 text-sm mt-1">Readers</p>
-              </div>
+      {/* Create Post Section */}
+      <section className="max-w-5xl mx-auto px-8 py-10">
+        <div className="bg-gradient-to-br from-cyan-500/20 to-purple-500/10 border border-white/10 rounded-[36px] p-10 backdrop-blur-xl">
+          <h2 className="text-4xl font-bold mb-4">Create a New Thought</h2>
 
-              <div className="bg-white/5 p-4 rounded-2xl text-center border border-white/10">
-                <h3 className="text-2xl font-bold">4.8★</h3>
-                <p className="text-gray-400 text-sm mt-1">Engagement</p>
-              </div>
+          <div className="space-y-5">
+            <input
+              type="text"
+              placeholder="Enter blog title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-cyan-400"
+            />
 
-              <div className="bg-white/5 p-4 rounded-2xl text-center border border-white/10">
-                <h3 className="text-2xl font-bold">1K+</h3>
-                <p className="text-gray-400 text-sm mt-1">Posts</p>
-              </div>
-            </div>
+            <textarea
+              rows="7"
+              placeholder="Write your thoughts here..."
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-cyan-400 resize-none"
+            ></textarea>
+
+            <button
+              onClick={createPost}
+              className="bg-white text-black px-8 py-3 rounded-2xl font-semibold hover:scale-105 transition-all"
+            >
+              Publish Post
+            </button>
           </div>
         </div>
       </section>
@@ -121,12 +166,6 @@ export default function ThoughtsBlogWebsite() {
               Read what creators are sharing today.
             </p>
           </div>
-
-          <input
-            type="text"
-            placeholder="Search blogs..."
-            className="bg-white/5 border border-white/10 rounded-xl px-5 py-3 outline-none focus:border-cyan-400 w-[260px]"
-          />
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
@@ -157,7 +196,10 @@ export default function ThoughtsBlogWebsite() {
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-6 text-gray-300">
-                    <button className="flex items-center gap-2 hover:text-pink-400 transition">
+                    <button
+                      onClick={() => likePost(post.id)}
+                      className="flex items-center gap-2 hover:text-pink-400 transition"
+                    >
                       ❤️ {post.likes}
                     </button>
 
@@ -171,93 +213,6 @@ export default function ThoughtsBlogWebsite() {
                   </button>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Create Post Section */}
-      <section className="max-w-5xl mx-auto px-8 py-20">
-        <div className="bg-gradient-to-br from-cyan-500/20 to-purple-500/10 border border-white/10 rounded-[36px] p-10 backdrop-blur-xl">
-          <h2 className="text-4xl font-bold mb-4">Create a New Thought</h2>
-          <p className="text-gray-400 mb-8">
-            Share ideas, stories, lessons, or anything on your mind.
-          </p>
-
-          <div className="space-y-5">
-            <input
-              type="text"
-              placeholder="Enter blog title"
-              className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-cyan-400"
-            />
-
-            <textarea
-              rows="7"
-              placeholder="Write your thoughts here..."
-              className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-cyan-400 resize-none"
-            ></textarea>
-
-            <div className="flex items-center justify-between flex-wrap gap-4">
-              <input
-                type="file"
-                className="text-sm text-gray-400"
-              />
-
-              <button className="bg-white text-black px-8 py-3 rounded-2xl font-semibold hover:scale-105 transition-all">
-                Publish Post
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Comments Preview */}
-      <section className="max-w-7xl mx-auto px-8 py-16">
-        <div className="flex items-center justify-between mb-10">
-          <div>
-            <h2 className="text-4xl font-bold">Community Comments</h2>
-            <p className="text-gray-400 mt-2">
-              Readers engaging with your content.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            {
-              name: "Aarav",
-              comment:
-                "This really motivated me to stay consistent with my goals.",
-            },
-            {
-              name: "Riya",
-              comment:
-                "The design looks amazing and the blog idea is inspiring.",
-            },
-            {
-              name: "Kabir",
-              comment:
-                "Looking forward to reading more posts from this platform.",
-            },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="bg-white/5 border border-white/10 rounded-3xl p-6 hover:bg-white/10 transition-all"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="h-14 w-14 rounded-full bg-cyan-400 text-black flex items-center justify-center font-bold text-lg">
-                  {item.name.charAt(0)}
-                </div>
-
-                <div>
-                  <h3 className="font-semibold text-lg">{item.name}</h3>
-                  <p className="text-sm text-gray-400">Community Member</p>
-                </div>
-              </div>
-
-              <p className="text-gray-300 leading-relaxed">
-                “{item.comment}”
-              </p>
             </div>
           ))}
         </div>
